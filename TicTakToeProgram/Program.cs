@@ -9,6 +9,8 @@ namespace TicTakToeProgram
         {
             char[] gameBoard = CreateBoard();
             char playerLetter = ChooseLetter();
+            Console.WriteLine("Player Choice = "+playerLetter);
+            showBoard(gameBoard);
         }
         public static char[] CreateBoard()
         {
@@ -32,6 +34,12 @@ namespace TicTakToeProgram
                 ChooseLetter();
             }
             return char.ToUpper(letter[0]);
+        }
+        public static void showBoard(char[] board)
+        {
+            Console.WriteLine( board[1] + " | " + board[2] + " | " + board[3] + "\n-----------\n"
+                              + board[4] + " | " + board[5] + " | " + board[6] + "\n----------\n" 
+                              + board[7] + " | " + board[8] + " | " + board[9]);
         }
     }
 }
