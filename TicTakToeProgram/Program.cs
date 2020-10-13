@@ -9,9 +9,11 @@ namespace TicTakToeProgram
         {
             char[] gameBoard = CreateBoard();
             char playerLetter = ChooseLetter();
-            Console.WriteLine("Player Choice = "+playerLetter);
+            char computerLetter = ComputerLetter(playerLetter);
+            Console.WriteLine("Player Letter = "+playerLetter+"\nComputer Letter = "+computerLetter);
             showBoard(gameBoard);
-            int getPlayerMove = UserMove(gameBoard); 
+            int getPLayerMove = UserMove(gameBoard);
+            PLayerMoveFilling(gameBoard, getPLayerMove, playerLetter);
         }
         public static char[] CreateBoard()
         {
@@ -28,13 +30,24 @@ namespace TicTakToeProgram
             string letter = Console.ReadLine();
             if (char.ToUpper(letter[0]) == 'X'  || char.ToUpper(letter[0]) == 'O')
             {
+                return char.ToUpper(letter[0]);
             }
             else
             {
                 Console.WriteLine("You entered a invalid entry. ");
-                ChooseLetter();
+                return ChooseLetter();
+            }  
+        }
+        public static char ComputerLetter(char letter)
+        {
+            if(letter == 'X')
+            {
+                return 'O';
             }
-            return char.ToUpper(letter[0]);
+            else
+            {
+                return 'X';
+            }
         }
         public static void showBoard(char[] board)
         {
@@ -46,16 +59,33 @@ namespace TicTakToeProgram
         {
             Console.WriteLine("Enter your position choice from (1-9) : ");
             int index = int.Parse(Console.ReadLine());
-            if((index >= 1 && index <= 9 ) && (board[index] == ' ' ))
+            if(index >= 1 && index <= 9  && FreeSpace(board, index) )
             {
-               
+                return index;
             }
             else
             {
                 Console.WriteLine("Invalid entry please try again!");
-                UserMove(board);
+                 return UserMove(board);
+            } 
+        }
+        public static bool FreeSpace(char[] board, int index)
+        {
+            if(board[index] == ' ')
+            {
+                return true;
             }
-            return index;
+            else
+            {
+                return false;
+            }
+        }
+        public static void PLayerMoveFilling(char[] board, int index, char letter)
+        {
+            if(FreeSpace(board, index))
+            {
+                board[index] = letter;
+            }
         }
     }
 }
