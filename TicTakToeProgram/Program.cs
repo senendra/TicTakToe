@@ -82,10 +82,7 @@ namespace TicTakToeProgram
         }
         public static void PLayerMoveFilling(char[] board, int index, char letter)
         {
-            if(FreeSpace(board, index))
-            {
-                board[index] = letter;
-            }
+           board[index] = letter;
         }
     }
 }
