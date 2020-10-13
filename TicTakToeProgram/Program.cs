@@ -5,8 +5,7 @@ namespace TicTakToeProgram
 {
     class Program
     {
-        public const int HEAD = 0;
-        public const int TAIL = 1;
+        public const int HEAD = 1;
         public static void Main(string[] args)
         {
             char[] gameBoard = CreateBoard();
@@ -14,9 +13,10 @@ namespace TicTakToeProgram
             char computerLetter = ComputerLetter(playerLetter);
             Console.WriteLine("Player Letter = "+playerLetter+"\nComputer Letter = "+computerLetter);
             showBoard(gameBoard);
-            WhoPlayFirst();
+            string whoPlayFirst = WhoPlayFirst();
+            Console.WriteLine(whoPlayFirst+" will play first");
             int getPLayerMove = UserMove(gameBoard);
-            PLayerMoveFilling(gameBoard, getPLayerMove, playerLetter);
+            PlayerMoveFilling(gameBoard, getPLayerMove, playerLetter);
         }
         public static char[] CreateBoard()
         {
@@ -83,21 +83,23 @@ namespace TicTakToeProgram
                 return false;
             }
         }
-        public static void PLayerMoveFilling(char[] board, int index, char letter)
+        public static void PlayerMoveFilling(char[] board, int index, char letter)
         {
            board[index] = letter;
         }
-        public static void WhoPlayFirst()
+        public static string WhoPlayFirst()
         {
             Random random = new Random();
             int toss = random.Next(0, 2);
-            if( toss == HEAD)
+            if(toss == HEAD)
             {
-                Console.WriteLine("PLayer Wins the toss. ");
+                
+                return "Player";
             }
             else
             {
-                Console.WriteLine("Computer wins the toss. ");
+               
+                return "Computer";
             }
         }
     }
